@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="302.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.viewController.CamionetaViewController">
+   <children>
+      <Label layoutX="60.0" layoutY="34.0" text="Datos Camioneta">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="110.0" text="Capacidad de Carga">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCapacidadCarga" layoutX="57.0" layoutY="147.0" />
+      <Button fx:id="btnAceptar" layoutX="91.0" layoutY="229.0" mnemonicParsing="false" onAction="#regresar" prefHeight="31.0" prefWidth="119.0" text="Aceptar" />
+   </children>
+</Pane>
