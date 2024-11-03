@@ -6,86 +6,43 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane fx:id="tpEmpresa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="654.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.viewController.EmpresaViewController">
+<TabPane fx:id="tpEmpresa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="809.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.viewController.EmpresaViewController">
   <tabs>
     <Tab fx:id="tbClientes" text="Clientes">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="603.0">
                <children>
-                  <TableView fx:id="tvClientes" layoutX="55.0" layoutY="59.0" prefHeight="279.0" prefWidth="543.0">
+                  <TableView fx:id="tvClientes" layoutX="113.0" layoutY="302.0" prefHeight="314.0" prefWidth="543.0">
                     <columns>
                       <TableColumn fx:id="tcNombre" prefWidth="324.0" text="Nombre" />
                       <TableColumn fx:id="tcCedula" prefWidth="218.0" text="Cedula" />
                     </columns>
                   </TableView>
-                  <Label layoutX="31.0" layoutY="362.0" text="Nombre">
+                  <Label layoutX="156.0" layoutY="145.0" text="Nombre:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="369.0" layoutY="362.0" text="Cedula">
+                  <Label layoutX="156.0" layoutY="199.0" text="Cedula:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtNombre" layoutX="109.0" layoutY="360.0" prefHeight="31.0" prefWidth="240.0" />
-                  <Label layoutX="235.0" layoutY="14.0" text="Acceso a Clientes" textAlignment="CENTER">
+                  <TextField fx:id="txtNombre" layoutX="265.0" layoutY="143.0" prefHeight="31.0" prefWidth="240.0" />
+                  <Label layoutX="257.0" layoutY="21.0" text="Gestion de Clientes" textAlignment="CENTER" textFill="#0026ff">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnAgregarC" layoutX="79.0" layoutY="421.0" mnemonicParsing="false" onAction="#agregarCliente" prefHeight="31.0" prefWidth="156.0" text="Agregar" />
-                  <Button fx:id="btnModificarC" layoutX="249.0" layoutY="421.0" mnemonicParsing="false" onAction="#modificarCliente" prefHeight="31.0" prefWidth="156.0" text="Modificar" />
-                  <Button fx:id="btnEliminarC" layoutX="419.0" layoutY="421.0" mnemonicParsing="false" onAction="#eliminarCliente" prefHeight="31.0" prefWidth="156.0" text="Eliminar" />
-                  <TextField fx:id="txtCedula" layoutX="442.0" layoutY="360.0" prefHeight="31.0" prefWidth="189.0" />
-               </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab fx:id="tbReservas" text="Reservas">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="231.0" layoutY="14.0" text="Acceso a Reservas">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="tvReservas" layoutX="22.0" layoutY="58.0" prefHeight="275.0" prefWidth="613.0">
-                    <columns>
-                      <TableColumn fx:id="tcCodigo" prefWidth="125.0" text="Codigo" />
-                      <TableColumn fx:id="tcDias" minWidth="4.0" prefWidth="79.0" text="# de dias" />
-                        <TableColumn fx:id="tcCedulaR" prefWidth="140.0" text="C.C Cliente" />
-                        <TableColumn fx:id="tcMatriculaR" prefWidth="142.0" text="Matricula" />
-                        <TableColumn fx:id="tcCosto" minWidth="4.0" prefWidth="126.0" text="Costo" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="29.0" layoutY="353.0" text="Codigo">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="331.0" layoutY="395.0" text="# de dias">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="331.0" layoutY="353.0" text="C.C">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="29.0" layoutY="395.0" text="Matricula">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtCodigo" layoutX="111.0" layoutY="351.0" />
-                  <TextField fx:id="txtCedulaR" layoutX="410.0" layoutY="351.0" />
-                  <TextField fx:id="txtMatriculaR" layoutX="111.0" layoutY="393.0" />
-                  <TextField fx:id="txtDias" layoutX="410.0" layoutY="393.0" />
-                  <Button fx:id="btnAgregarR" layoutX="46.0" layoutY="447.0" mnemonicParsing="false" onAction="#agregarReserva" prefHeight="31.0" prefWidth="166.0" text="Agregar" />
-                  <Button fx:id="btnModificarR" layoutX="248.0" layoutY="447.0" mnemonicParsing="false" onAction="#modificarReserva" prefHeight="31.0" prefWidth="166.0" text="Modificar" />
-                  <Button fx:id="btnEliminarR" layoutX="450.0" layoutY="447.0" mnemonicParsing="false" onAction="#eliminarReserva" prefHeight="31.0" prefWidth="166.0" text="Eliminar" />
+                  <Button fx:id="btnAgregarC" layoutX="113.0" layoutY="648.0" mnemonicParsing="false" onAction="#agregarCliente" prefHeight="31.0" prefWidth="156.0" text="Agregar" />
+                  <Button fx:id="btnModificarC" layoutX="307.0" layoutY="648.0" mnemonicParsing="false" onAction="#modificarCliente" prefHeight="31.0" prefWidth="156.0" text="Modificar" />
+                  <Button fx:id="btnEliminarC" layoutX="504.0" layoutY="648.0" mnemonicParsing="false" onAction="#eliminarCliente" prefHeight="31.0" prefWidth="156.0" text="Eliminar" />
+                  <TextField fx:id="txtCedula" layoutX="265.0" layoutY="197.0" prefHeight="31.0" prefWidth="239.0" />
+                  <Label layoutX="74.0" layoutY="100.0" text="1. Ingrese los datos del Cliente" />
+                  <Button fx:id="btnLimpiarC" layoutX="350.0" layoutY="243.0" mnemonicParsing="false" onAction="#limpiarCliente" text="Limpiar" />
+                  <Separator layoutX="62.0" layoutY="75.0" prefHeight="16.0" prefWidth="665.0" />
+                  <Separator layoutX="52.0" layoutY="280.0" prefHeight="16.0" prefWidth="665.0" />
+                  <Separator layoutX="53.0" layoutY="626.0" prefHeight="16.0" prefWidth="665.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -93,12 +50,12 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="226.0" layoutY="14.0" text="Acceso a Vehiculos">
+                  <Label layoutX="256.0" layoutY="22.0" text="Gestion de Vehiculos" textFill="#0026ff">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tvVehiculos" layoutX="25.0" layoutY="58.0" prefHeight="249.0" prefWidth="605.0">
+                  <TableView fx:id="tvVehiculos" layoutX="93.0" layoutY="401.0" prefHeight="226.0" prefWidth="605.0">
                     <columns>
                       <TableColumn fx:id="tcMatricula" prefWidth="97.0" text="Matricula" />
                       <TableColumn fx:id="tcMarca" prefWidth="118.0" text="Marca" />
@@ -107,45 +64,107 @@
                         <TableColumn fx:id="tcTarifaBase" prefWidth="144.0" text="Tarifa Base" />
                     </columns>
                   </TableView>
-                  <Label layoutX="23.0" layoutY="328.0" text="Matricula">
+                  <Label layoutX="50.0" layoutY="143.0" text="Matricula:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="336.0" layoutY="328.0" text="Marca">
+                  <Label layoutX="50.0" layoutY="229.0" text="Marca:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="23.0" layoutY="369.0" text="Modelo">
+                  <Label layoutX="50.0" layoutY="186.0" text="Modelo:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="25.0" layoutY="408.0" text="Año Fabricación">
+                  <Label layoutX="415.0" layoutY="143.0" text="Año Fabricación:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="336.0" layoutY="369.0" text="Tarifa Base">
+                  <Label layoutX="415.0" layoutY="186.0" text="Tarifa Base:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtMatricula" layoutX="126.0" layoutY="326.0" />
-                  <TextField fx:id="txtMarca" layoutX="430.0" layoutY="326.0" />
-                  <TextField fx:id="txtModelo" layoutX="126.0" layoutY="367.0" />
-                  <TextField fx:id="txtAnioFabricacion" layoutX="166.0" layoutY="406.0" prefHeight="24.0" prefWidth="147.0" />
-                  <Button fx:id="btnAgregarV" layoutX="60.0" layoutY="457.0" mnemonicParsing="false" onAction="#agregarVehiculo" prefHeight="31.0" prefWidth="147.0" text="Agregar" />
-                  <Button fx:id="btnModificarV" layoutX="247.0" layoutY="457.0" mnemonicParsing="false" onAction="#modificarVehiculo" prefHeight="31.0" prefWidth="147.0" text="Modificar" />
-                  <Button fx:id="btnEliminarV" layoutX="437.0" layoutY="457.0" mnemonicParsing="false" onAction="#eliminarVehiculo" prefHeight="31.0" prefWidth="147.0" text="Eliminar" />
-                  <RadioButton fx:id="rdAuto" layoutX="344.0" layoutY="411.0" mnemonicParsing="false" text="Auto" />
-                  <TextField fx:id="txtTarifaBase" layoutX="430.0" layoutY="367.0" />
-                  <RadioButton fx:id="rdMoto" layoutX="428.0" layoutY="411.0" mnemonicParsing="false" text="Moto" />
-                  <RadioButton fx:id="rdCamioneta" layoutX="511.0" layoutY="411.0" mnemonicParsing="false" text="Camioneta" />
+                  <TextField fx:id="txtMatricula" layoutX="189.0" layoutY="141.0" />
+                  <TextField fx:id="txtMarca" layoutX="189.0" layoutY="227.0" />
+                  <TextField fx:id="txtModelo" layoutX="189.0" layoutY="184.0" />
+                  <Button fx:id="btnAgregarV" layoutX="124.0" layoutY="660.0" mnemonicParsing="false" onAction="#agregarVehiculo" prefHeight="31.0" prefWidth="147.0" text="Agregar" />
+                  <Button fx:id="btnModificarV" layoutX="321.0" layoutY="660.0" mnemonicParsing="false" onAction="#modificarVehiculo" prefHeight="31.0" prefWidth="147.0" text="Modificar" />
+                  <Button fx:id="btnEliminarV" layoutX="508.0" layoutY="660.0" mnemonicParsing="false" onAction="#eliminarVehiculo" prefHeight="31.0" prefWidth="147.0" text="Eliminar" />
+                  <RadioButton fx:id="rdAuto" layoutX="51.0" layoutY="350.0" mnemonicParsing="false" text="Auto" />
+                  <TextField fx:id="txtTarifaBase" layoutX="561.0" layoutY="184.0" />
+                  <RadioButton fx:id="rdMoto" layoutX="133.0" layoutY="350.0" mnemonicParsing="false" text="Moto" />
+                  <RadioButton fx:id="rdCamioneta" layoutX="222.0" layoutY="350.0" mnemonicParsing="false" text="Camioneta" />
+                  <Label layoutX="27.0" layoutY="98.0" text="1. Ingrese los datos del Vehiculo" />
+                  <Button fx:id="btnLimpiarV" layoutX="361.0" layoutY="267.0" mnemonicParsing="false" onAction="#limpiarVehiculo" text="Limpiar" />
+                  <Label layoutX="27.0" layoutY="323.0" text="2. Seleccione el tipo de Vehiculo" />
+                  <Separator layoutX="39.0" layoutY="73.0" prefHeight="16.0" prefWidth="725.0" />
+                  <TextField fx:id="txtAnioFabricacion" layoutX="561.0" layoutY="141.0" />
+                  <Separator layoutX="32.0" layoutY="307.0" prefHeight="16.0" prefWidth="725.0" />
+                  <Separator layoutX="32.0" layoutY="378.0" prefHeight="16.0" prefWidth="725.0" />
+                  <Separator layoutX="27.0" layoutY="638.0" prefHeight="16.0" prefWidth="725.0" />
                </children>
             </AnchorPane>
         </content>
       </Tab>
+    <Tab fx:id="tbReservas" text="Reservas">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="272.0" layoutY="21.0" text="Gestion de Reservas" textFill="#0026ff">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tvReservas" layoutX="97.0" layoutY="419.0" prefHeight="231.0" prefWidth="613.0">
+                    <columns>
+                      <TableColumn fx:id="tcCodigo" prefWidth="125.0" text="Codigo" />
+                      <TableColumn fx:id="tcDias" minWidth="4.0" prefWidth="79.0" text="# de dias" />
+                        <TableColumn fx:id="tcCedulaR" prefWidth="140.0" text="C.C Cliente" />
+                        <TableColumn fx:id="tcMatriculaR" prefWidth="142.0" text="Matricula" />
+                        <TableColumn fx:id="tcCosto" minWidth="4.0" prefWidth="126.0" text="Costo" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="113.0" layoutY="128.0" text="Código:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="113.0" layoutY="169.0" text="Número de dias:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="202.0" layoutY="251.0" text="C.C:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="178.0" layoutY="333.0" text="Matricula:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCodigo" layoutX="271.0" layoutY="126.0" prefHeight="31.0" prefWidth="266.0" />
+                  <TextField fx:id="txtCedulaR" layoutX="272.0" layoutY="167.0" prefHeight="31.0" prefWidth="265.0" />
+                  <TextField fx:id="txtMatriculaR" layoutX="271.0" layoutY="249.0" prefHeight="31.0" prefWidth="265.0" />
+                  <TextField fx:id="txtDias" layoutX="271.0" layoutY="331.0" prefHeight="31.0" prefWidth="266.0" />
+                  <Button fx:id="btnAgregarR" layoutX="119.0" layoutY="671.0" mnemonicParsing="false" onAction="#agregarReserva" prefHeight="31.0" prefWidth="166.0" text="Agregar" />
+                  <Button fx:id="btnModificarR" layoutX="321.0" layoutY="671.0" mnemonicParsing="false" onAction="#modificarReserva" prefHeight="31.0" prefWidth="166.0" text="Modificar" />
+                  <Button fx:id="btnEliminarR" layoutX="525.0" layoutY="671.0" mnemonicParsing="false" onAction="#eliminarReserva" prefHeight="31.0" prefWidth="166.0" text="Eliminar" />
+                  <Label layoutX="67.0" layoutY="86.0" text="1. Ingrese los datos de la Reserva" />
+                  <Label layoutX="69.0" layoutY="216.0" text="2. Ingrese la cedula del Cliente de la correspondiente Reserva" />
+                  <Label layoutX="69.0" layoutY="296.0" text="3. Ingrese la matricula del Vehiculo a reservar" />
+                  <Button fx:id="btnLImpiarR" layoutX="369.0" layoutY="369.0" mnemonicParsing="false" onAction="#limpiarReserva" text="Limpiar" />
+                  <Separator layoutX="56.0" layoutY="75.0" prefHeight="11.0" prefWidth="696.0" />
+                  <Separator layoutX="56.0" layoutY="405.0" prefHeight="11.0" prefWidth="696.0" />
+                  <Separator layoutX="56.0" layoutY="656.0" prefHeight="11.0" prefWidth="696.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
   </tabs>
 </TabPane>

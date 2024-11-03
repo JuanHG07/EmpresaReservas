@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import co.edu.uniquindio.poo.model.Camioneta;
 import co.edu.uniquindio.poo.model.Empresa;
 import co.edu.uniquindio.poo.viewController.AutoViewController;
 import co.edu.uniquindio.poo.viewController.CamionetaViewController;
@@ -25,6 +24,10 @@ public class App extends Application {
     private Stage autoStage;
     private Stage motoStage;
     private Stage camionetaStage;
+
+    AutoViewController autoViewController;
+    MotoViewController motoViewController;
+    CamionetaViewController camionetaViewController;
 
     public static Empresa empresa = new Empresa("UQ");
 
@@ -52,25 +55,28 @@ public class App extends Application {
             empresaStage.show();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     public void openAutoView() {
         try {
+            if (autoStage == null) { 
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AutoView.fxml"));
-            Parent root = loader.load();
-
-            AutoViewController autoViewController = loader.getController();
-            autoViewController.setApp(this);
-
-            Scene scene = new Scene(root);
-            autoStage.initModality(Modality.WINDOW_MODAL);
-            autoStage.setScene(scene);
-            autoStage.showAndWait();
-
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AutoView.fxml"));
+                Parent root = loader.load();
+        
+                this.autoViewController = loader.getController();
+                autoViewController.setApp(this);
+        
+                Scene scene = new Scene(root);
+                autoStage = new Stage(); 
+                autoStage.initModality(Modality.APPLICATION_MODAL); 
+                autoStage.setScene(scene);
+            }
+            
+            autoStage.showAndWait(); 
+        
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,15 +85,20 @@ public class App extends Application {
     public void openMotoView() {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MotoView.fxml"));
-            Parent root = loader.load();
+            if (motoStage == null) {
 
-            MotoViewController motoViewController = loader.getController();
-            motoViewController.setApp(this);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MotoView.fxml"));
+                Parent root = loader.load();
 
-            Scene scene = new Scene(root);
-            motoStage.initModality(Modality.WINDOW_MODAL);
-            motoStage.setScene(scene);
+                this.motoViewController = loader.getController();
+                motoViewController.setApp(this);
+
+                Scene scene = new Scene(root);
+                motoStage =  new Stage();
+                motoStage.initModality(Modality.APPLICATION_MODAL);
+                motoStage.setScene(scene);
+            }
+            
             motoStage.showAndWait();
 
         } catch (IOException e) {
@@ -98,19 +109,36 @@ public class App extends Application {
     public void openCamionetaView() {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CamionetaView.fxml"));
-            Parent root = loader.load();
+            if (camionetaStage == null) {
 
-            CamionetaViewController camionetaViewController = loader.getController();
-            camionetaViewController.setApp(this);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("CamionetaView.fxml"));
+                Parent root = loader.load();
 
-            Scene scene = new Scene(root);
-            camionetaStage.initModality(Modality.WINDOW_MODAL);
-            camionetaStage.setScene(scene);
+                this.camionetaViewController = loader.getController();
+                camionetaViewController.setApp(this);
+
+                Scene scene = new Scene(root);
+                camionetaStage = new Stage();
+                camionetaStage.initModality(Modality.APPLICATION_MODAL);
+                camionetaStage.setScene(scene);
+            }
+            
             camionetaStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public AutoViewController getAutoViewController() {
+        return autoViewController;
+    }
+
+    public MotoViewController getMotoViewController() {
+        return motoViewController;
+    }
+
+    public CamionetaViewController getCamionetaViewController() {
+        return camionetaViewController;
     }
 }

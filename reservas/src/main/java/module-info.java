@@ -1,4 +1,4 @@
-module co.edu.uniquindio.poo {
+module co.edu.uniquindio.poo.java {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.base;

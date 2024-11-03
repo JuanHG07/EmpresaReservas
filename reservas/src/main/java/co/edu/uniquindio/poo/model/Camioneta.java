@@ -4,8 +4,7 @@ public class Camioneta extends Vehiculo {
     private double capacidadCarga;
     private static final double porcentajeExtra = 0.1;
 
-    public Camioneta(String matricula, String marca, String modelo, int anioFabricacion, double tarifaBase,
-            Reserva reserva, double capacidadCarga) {
+    public Camioneta(String matricula, String marca, String modelo, int anioFabricacion, double tarifaBase, double capacidadCarga) {
         super(matricula, marca, modelo, anioFabricacion, tarifaBase);
         this.capacidadCarga = capacidadCarga;
     }
@@ -19,8 +18,8 @@ public class Camioneta extends Vehiculo {
     }
 
     @Override
-    public double calcularCostoVehiculo() {
-        int diasReserva = super.getReserva().getDias();
+    public double calcularCostoVehiculo(Reserva reserva) {
+        int diasReserva = reserva.getDias();
         double tarifaBase = super.getTarifaBase();
         double costo = diasReserva * tarifaBase;
         costo += costo * capacidadCarga * porcentajeExtra;

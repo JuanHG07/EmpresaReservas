@@ -6,7 +6,6 @@ public abstract class Vehiculo {
     private String modelo;
     private int anioFabricacion;
     private double tarifaBase;
-    private Reserva reserva;
 
     public Vehiculo(String matricula, String marca, String modelo, int anioFabricacion, double tarifaBase) {
         this.matricula = matricula;
@@ -56,15 +55,7 @@ public abstract class Vehiculo {
         this.tarifaBase = tarifaBase;
     }
 
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
-
-    public abstract double calcularCostoVehiculo();
+    public abstract double calcularCostoVehiculo(Reserva reserva);
 
     @Override
     public String toString() {

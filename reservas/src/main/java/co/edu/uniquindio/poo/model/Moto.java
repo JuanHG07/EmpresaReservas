@@ -4,8 +4,7 @@ public class Moto extends Vehiculo {
     private TipoCaja tipoCaja;
     private static final double tarifaExtra = 5000;
 
-    public Moto(String matricula, String marca, String modelo, int anioFabricacion, double tarifaBase, Reserva reserva,
-            TipoCaja tipoCaja) {
+    public Moto(String matricula, String marca, String modelo, int anioFabricacion, double tarifaBase, TipoCaja tipoCaja) {
         super(matricula, marca, modelo, anioFabricacion, tarifaBase);
         this.tipoCaja = tipoCaja;
     }
@@ -19,8 +18,8 @@ public class Moto extends Vehiculo {
     }
 
     @Override
-    public double calcularCostoVehiculo() {
-        int diasReserva = super.getReserva().getDias();
+    public double calcularCostoVehiculo(Reserva reserva) {
+        int diasReserva = reserva.getDias();
         double tarifaBase = super.getTarifaBase();
         double costo = tarifaBase * diasReserva;
         if (tipoCaja.equals(TipoCaja.AUTOMATICA)) {

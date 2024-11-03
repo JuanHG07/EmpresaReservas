@@ -21,40 +21,63 @@ public class AutoViewController {
 
     AutoController autoController;
 
-    private int numeroPuertas;
+    private int numPuertas;
 
     @FXML
     void initialize() {
         autoController = new AutoController(app.empresa);
+
+        txtNumeroPuertas.clear();
     }
     
     @FXML
     void regresar(ActionEvent event) {
-        
-        guardarInfo();
 
-        Stage stage = (Stage) btnAceptar.getScene().getWindow();
-        stage.close();
-    }
+        if (obtenerData()) {
 
-    public void guardarInfo() {
-        try {
-            this.numeroPuertas = Integer.parseInt(txtNumeroPuertas.getText());
-        } catch (NumberFormatException e) {
+            Stage stage = (Stage) btnAceptar.getScene().getWindow();
+            stage.close();
+
+        } else {
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("ERROR");
-            alert.setContentText("Formato incorrecto.");
+            alert.setContentText("Debes rellenar los espacios.");
             alert.showAndWait();
+
+        }  
+    }
+    
+    public boolean obtenerData() {
+        
+        boolean centinela = false;
+        String auxText = txtNumeroPuertas.getText();
+
+        try {
+
+            if (!auxText.isEmpty()) {
+
+                int aux = Integer.parseInt(txtNumeroPuertas.getText());
+                this.numPuertas = aux;
+                centinela = true;
+
+            }
+
+        } catch (NumberFormatException e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("ERROR");
+            alert.setContentText("Formato incorrecto de la casilla.");
+            alert.showAndWait();
+            
         }
+        return centinela;
     }
 
-    public int getNumeroPuertas() {
-        return numeroPuertas;
-    }
-
-    public void setNumeroPuertas(int numeroPuertas) {
-        this.numeroPuertas = numeroPuertas;
+    public int getNumPuertas() {
+        return numPuertas;
     }
 
     public void setApp(App app) {

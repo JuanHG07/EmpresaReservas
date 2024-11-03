@@ -1,6 +1,5 @@
 package co.edu.uniquindio.poo.controller;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 import co.edu.uniquindio.poo.model.Cliente;

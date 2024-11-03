@@ -2,8 +2,12 @@ package co.edu.uniquindio.poo.viewController;
 
 import co.edu.uniquindio.poo.App;
 import co.edu.uniquindio.poo.controller.EmpresaController;
+import co.edu.uniquindio.poo.model.Auto;
+import co.edu.uniquindio.poo.model.Camioneta;
 import co.edu.uniquindio.poo.model.Cliente;
+import co.edu.uniquindio.poo.model.Moto;
 import co.edu.uniquindio.poo.model.Reserva;
+import co.edu.uniquindio.poo.model.TipoCaja;
 import co.edu.uniquindio.poo.model.Vehiculo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +26,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class EmpresaViewController {
+
+    @FXML
+    private Button btnLimpiarC;
+
+    @FXML
+    private Button btnLimpiarV;
+
+    @FXML
+    private Button btnLimpiarR;
 
     @FXML
     private RadioButton rdAuto;
@@ -158,12 +171,17 @@ public class EmpresaViewController {
     private ObservableList<Vehiculo> vehiculos;
 
     Cliente selectedCliente;
+    Vehiculo selectedVehiculo;
+    Reserva selectedReserva;
+
+    ToggleGroup tg;
 
     @FXML
     void initialize() {
         clientes = FXCollections.observableArrayList();
         reservas = FXCollections.observableArrayList();
         vehiculos = FXCollections.observableArrayList();
+        this.tg = new ToggleGroup();
 
         empresaController = new EmpresaController(app.empresa);
 
@@ -185,6 +203,8 @@ public class EmpresaViewController {
         enlaceOpciones();
 
         seleccionarCliente();
+        seleccionarVehiculo();
+        seleccionarReserva();
     }
 
     private void enlaceDataCliente() {
@@ -209,7 +229,6 @@ public class EmpresaViewController {
     }
 
     private void enlaceOpciones() {
-        ToggleGroup tg = new ToggleGroup();
         rdMoto.setToggleGroup(tg);
         rdAuto.setToggleGroup(tg);
         rdCamioneta.setToggleGroup(tg);
@@ -229,29 +248,69 @@ public class EmpresaViewController {
         }
     }
 
-    public void limpiarCliente() {
-        txtNombre.clear();
-        txtCedula.clear();
+    private void seleccionarVehiculo() {
+        tvVehiculos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedVehiculo = newSelection;
+            mostrarInformacionVehiculo(selectedVehiculo);
+        });
+    }
+
+    private void mostrarInformacionVehiculo(Vehiculo vehiculo) {
+        if (vehiculo != null) {
+            txtMatricula.setText(vehiculo.getMatricula());
+            txtMarca.setText(vehiculo.getMarca());
+            txtModelo.setText(vehiculo.getModelo());
+            txtAnioFabricacion.setText(vehiculo.getAnioFabricacion() + "");
+            txtTarifaBase.setText(vehiculo.getTarifaBase() + "");
+
+            rdAuto.setSelected(false);
+            rdMoto.setSelected(false);
+            rdCamioneta.setSelected(false);
+        
+            if (vehiculo instanceof Auto) {
+                rdAuto.setSelected(true);
+            } else if (vehiculo instanceof Moto) {
+                rdMoto.setSelected(true);
+            } else if (vehiculo instanceof Camioneta) {
+                rdCamioneta.setSelected(true);
+            }
+        }
+    }
+
+    private void seleccionarReserva() {
+        tvReservas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedReserva = newSelection;
+            mostrarInformacionReserva(selectedReserva);
+        });
+    }
+
+    private void mostrarInformacionReserva(Reserva reserva) {
+        if (reserva != null) {
+            txtCodigo.setText(reserva.getCodigo());
+            txtDias.setText(reserva.getDias() + "");
+            txtCedulaR.setText(reserva.getCliente().getCedula());
+            txtMatriculaR.setText(reserva.getVehiculo().getMatricula());
+        }
     }
 
     @FXML
-    public void agregarCliente(ActionEvent event) {
+    void agregarCliente(ActionEvent event) {
 
         String nombre = txtNombre.getText();
         String cedula = txtCedula.getText();
 
         Cliente cliente = new Cliente(nombre, cedula);
 
-        if (nombre.equals("") || cedula.equals("")) {
+        if (nombre.isEmpty() || cedula.isEmpty()) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("ERROR");
-            alert.setContentText("Espacios vacios.");
+            alert.setContentText("Debes rellenar los espacios.");
             alert.showAndWait();
 
         } else {
-            
+
             if (!empresaController.verificarCliente(cedula)) {
                 empresaController.agregarCliente(cliente);
                 clientes.add(cliente);
@@ -264,12 +323,11 @@ public class EmpresaViewController {
                 alert.setContentText("El cliente ya existe.");
                 alert.showAndWait();
             }
-            
         }
     }
 
     @FXML
-    public void modificarCliente(ActionEvent event) {
+    void modificarCliente(ActionEvent event) {
 
         Cliente cliente = tvClientes.getSelectionModel().getSelectedItem();
 
@@ -282,21 +340,32 @@ public class EmpresaViewController {
         } else {
             String nombre = txtNombre.getText();
             String cedula = txtCedula.getText();
-
-            Cliente aux = new Cliente(nombre, cedula);
-
-            if (!empresaController.verificarCliente(cedula)) {
-                cliente.setNombre(aux.getNombre());
-                cliente.setCedula(aux.getCedula());
-
-                tvClientes.refresh();
-                limpiarCliente();
-            } else {
+            if (nombre.isEmpty() || cedula.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("ERROR");
-                alert.setContentText("El cliente ya existe.");
+                alert.setContentText("Debes rellenar los espacios.");
                 alert.showAndWait();
+            } else {
+
+                Cliente aux = new Cliente(nombre, cedula);
+
+                if (cliente.getCedula().equals(cedula)) {
+                    cliente.setNombre(aux.getNombre());
+                    cliente.setCedula(aux.getCedula());
+
+                    tvClientes.refresh();
+                    tvClientes.getSelectionModel().clearSelection();
+                    limpiarCliente();
+                } else if (empresaController.verificarCliente(cedula)) {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("El cliente ya existe.");
+                    alert.showAndWait();
+
+                }
             }
         }
     }
@@ -322,6 +391,249 @@ public class EmpresaViewController {
     }
 
     @FXML
+    void limpiarCliente(ActionEvent event) {
+        limpiarCliente();
+    }
+
+    public void limpiarCliente() {
+        txtNombre.clear();
+        txtCedula.clear();
+    }
+
+    @FXML
+    void agregarVehiculo(ActionEvent event) {
+
+        try {
+
+            String matricula = txtMatricula.getText();
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            String anioFabricacionText = txtAnioFabricacion.getText();
+            String tarifaBaseText = txtTarifaBase.getText();
+
+            Vehiculo vehiculo;
+
+            if (matricula.isEmpty() || marca.isEmpty() || modelo.isEmpty() || anioFabricacionText.isEmpty() || tarifaBaseText.isEmpty()) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("ERROR");
+                alert.setContentText("Debes rellenar los espacios.");
+                alert.showAndWait();
+
+            } else {
+
+                int anioFabricacion = Integer.parseInt(txtAnioFabricacion.getText());
+                double tarifaBase = Double.parseDouble(txtTarifaBase.getText());
+
+                if (!empresaController.verificarVehiculo(matricula)) {
+
+                    if (rdAuto.isSelected()) {
+
+                        app.openAutoView();
+
+                        int numPuertas = app.getAutoViewController().getNumPuertas();
+
+                        vehiculo = new Auto(matricula, marca, modelo, anioFabricacion, tarifaBase, numPuertas);
+                        empresaController.agregarVehiculo(vehiculo);
+                        vehiculos.add(vehiculo);
+                        tvVehiculos.setItems(vehiculos);
+                        limpiarVehiculo();
+
+                    } else if (rdMoto.isSelected()) {
+
+                        app.openMotoView();
+
+                        TipoCaja tipoCaja = app.getMotoViewController().getTipoCaja();
+
+                        vehiculo = new Moto(matricula, marca, modelo, anioFabricacion, tarifaBase, tipoCaja);
+                        empresaController.agregarVehiculo(vehiculo);
+                        vehiculos.add(vehiculo);
+                        tvVehiculos.setItems(vehiculos);
+                        limpiarVehiculo();
+
+                    } else if (rdCamioneta.isSelected()) {
+
+                        app.openCamionetaView();
+
+                        double capacidad = app.getCamionetaViewController().getCapacidad();
+
+                        vehiculo = new Camioneta(matricula, marca, modelo, anioFabricacion, tarifaBase, capacidad);
+                        empresaController.agregarVehiculo(vehiculo);
+                        vehiculos.add(vehiculo);
+                        tvVehiculos.setItems(vehiculos);
+                        limpiarVehiculo();
+
+                    } else {
+
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText(null);
+                        alert.setTitle("ERROR");
+                        alert.setContentText("Debes seleccionar una opcion de vehiculo.");
+                        alert.showAndWait();
+
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("El vehiculo ya existe.");
+                    alert.showAndWait();
+                }
+            }
+        } catch (NumberFormatException e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("ERROR");
+            alert.setContentText("Formato incorrecto en casilla: Año de Fabricacion o Tarifa Base.");
+            alert.showAndWait();
+
+        }
+    }
+
+    @FXML
+    void modificarVehiculo(ActionEvent event) {
+
+        Vehiculo vehiculo = tvVehiculos.getSelectionModel().getSelectedItem();
+
+        if (vehiculo == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("ERROR");
+            alert.setContentText("Debes seleccionar a un vehiculo.");
+            alert.showAndWait();
+        } else {
+
+            String matricula = txtMatricula.getText();
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            int anioFabricacion = Integer.parseInt(txtAnioFabricacion.getText());
+            double tarifaBase = Double.parseDouble(txtTarifaBase.getText());
+
+            if (vehiculo instanceof Auto) {
+                rdAuto.setSelected(true);
+            } else if (vehiculo instanceof Moto) {
+                rdMoto.setSelected(true);
+            } else if (vehiculo instanceof Camioneta) {
+                rdCamioneta.setSelected(true);
+            }
+
+            if (vehiculo.getMatricula().equals(matricula)) {
+                
+                if (rdAuto.isSelected()) {
+
+                    app.openAutoView();
+
+                    int numPuertas = app.getAutoViewController().getNumPuertas();
+
+                    Vehiculo aux = new Auto(matricula, marca, modelo, anioFabricacion, tarifaBase, numPuertas);
+                    
+                    vehiculo.setMatricula(aux.getMatricula());  
+                    vehiculo.setMarca(aux.getMarca());
+                    vehiculo.setModelo(aux.getModelo());
+                    vehiculo.setAnioFabricacion(aux.getAnioFabricacion());
+                    vehiculo.setTarifaBase(aux.getTarifaBase());
+                    ((Auto) vehiculo).setNumPuertas(((Auto) aux).getNumPuertas());
+
+                    tvVehiculos.refresh();
+                    tvVehiculos.getSelectionModel().clearSelection();
+                    limpiarVehiculo();
+
+                } else if (rdMoto.isSelected()) {
+
+                    app.openMotoView();
+
+                    TipoCaja tipoCaja = app.getMotoViewController().getTipoCaja();
+
+                    Vehiculo aux = new Moto(matricula, marca, modelo, anioFabricacion, tarifaBase, tipoCaja);
+                    
+                    vehiculo.setMatricula(aux.getMatricula());  
+                    vehiculo.setMarca(aux.getMarca());
+                    vehiculo.setModelo(aux.getModelo());
+                    vehiculo.setAnioFabricacion(aux.getAnioFabricacion());
+                    vehiculo.setTarifaBase(aux.getTarifaBase());
+                    ((Moto) vehiculo).setTipoCaja(((Moto) aux).getTipoCaja());
+
+                    tvVehiculos.refresh();
+                    tvVehiculos.getSelectionModel().clearSelection();
+                    limpiarVehiculo();
+
+                } else if (rdCamioneta.isSelected()) {
+
+                    app.openCamionetaView();
+
+                    double capacidad = app.getCamionetaViewController().getCapacidad();
+
+                    Vehiculo aux = new Camioneta(matricula, marca, modelo, anioFabricacion, tarifaBase, capacidad);
+                    
+                    vehiculo.setMatricula(aux.getMatricula());  
+                    vehiculo.setMarca(aux.getMarca());
+                    vehiculo.setModelo(aux.getModelo());
+                    vehiculo.setAnioFabricacion(aux.getAnioFabricacion());
+                    vehiculo.setTarifaBase(aux.getTarifaBase());
+                    ((Camioneta) vehiculo).setCapacidadCarga(((Camioneta) aux).getCapacidadCarga());
+
+                    tvVehiculos.refresh();
+                    tvVehiculos.getSelectionModel().clearSelection();
+                    limpiarVehiculo();
+                } else {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("ERROR");
+                    alert.setContentText("Debes seleccionar una opcion de vehiculo.");
+                    alert.showAndWait();
+
+                }
+
+            } else if (empresaController.verificarVehiculo(matricula)) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("ERROR");
+                alert.setContentText("El vehiculo ya existe.");
+                alert.showAndWait();
+
+            }
+        }
+    }
+
+    @FXML
+    void eliminarVehiculo(ActionEvent event) {
+
+        Vehiculo vehiculo = tvVehiculos.getSelectionModel().getSelectedItem();
+
+        if (vehiculo == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("ERROR");
+            alert.setContentText("Debes seleccionar a un vehiculo.");
+            alert.showAndWait();
+        } else {
+            empresaController.obtenerListaVehiculos().remove(vehiculo);
+            vehiculos.remove(vehiculo);
+
+            tvVehiculos.refresh();
+            limpiarVehiculo();
+        }
+    }
+
+    @FXML
+    void limpiarVehiculo(ActionEvent event) {
+        limpiarVehiculo();
+    }
+
+    public void limpiarVehiculo() {
+        txtMatricula.clear();
+        txtModelo.clear();
+        txtMarca.clear();
+        txtAnioFabricacion.clear();
+        txtTarifaBase.clear();
+        tg.selectToggle(null);
+    }
+
+    @FXML
     void agregarReserva(ActionEvent event) {
 
         try {
@@ -340,8 +652,8 @@ public class EmpresaViewController {
                 empresaController.agregarReserva(reserva);
                 reservas.add(reserva);
                 tvReservas.setItems(reservas);
+                reserva.calcularCosto();
                 cliente.getReservas().add(reserva);
-                vehiculo.setReserva(reserva);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
@@ -437,39 +749,7 @@ public class EmpresaViewController {
     }
 
     @FXML
-    void agregarVehiculo(ActionEvent event) {
-
-        try {
-
-            String matricula = txtMatricula.getText();
-            String marca = txtMarca.getText();
-            String modelo = txtModelo.getText();
-            int anioFabricacion = Integer.parseInt(txtAnioFabricacion.getText());
-            double tarifaBase = Integer.parseInt(txtTarifaBase.getText());
-
-            if (rdAuto.isSelected()) {
-                app.openAutoView();
-            } else if (rdMoto.isSelected()) {
-                app.openMotoView();
-            } else if (rdCamioneta.isSelected()) {
-                app.openCamionetaView();
-            }
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("ERROR");
-            alert.setContentText("Formato incorrecto.");
-            alert.showAndWait();
-        }
-    }
-
-    @FXML
-    void modificarVehiculo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void eliminarVehiculo(ActionEvent event) {
+    void limpiarReserva(ActionEvent event) {
 
     }
 

@@ -3,8 +3,7 @@ package co.edu.uniquindio.poo.model;
 public class Auto extends Vehiculo {
     private int numPuertas;
 
-    public Auto(String matricula, String marca, String modelo, int anioFabricacion, double tarifaBase, Reserva reserva,
-            int numPuertas) {
+    public Auto(String matricula, String marca, String modelo, int anioFabricacion, double tarifaBase, int numPuertas) {
         super(matricula, marca, modelo, anioFabricacion, tarifaBase);
         this.numPuertas = numPuertas;
     }
@@ -18,8 +17,8 @@ public class Auto extends Vehiculo {
     }
 
     @Override
-    public double calcularCostoVehiculo() {
-        int diasReserva = super.getReserva().getDias();
+    public double calcularCostoVehiculo(Reserva reserva) {
+        int diasReserva = reserva.getDias();
         double tarifaBase = super.getTarifaBase();
         double costo = tarifaBase * diasReserva;
         return costo;

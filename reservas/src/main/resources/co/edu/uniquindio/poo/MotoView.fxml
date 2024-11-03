@@ -7,18 +7,20 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="302.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.viewController.MotoViewController">
    <children>
-      <Label layoutX="87.0" layoutY="25.0" text="Datos Moto">
+      <Label layoutX="59.0" layoutY="25.0" text="Datos de la Moto" textFill="#0026ff">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="101.0" layoutY="81.0" text="Tipo de Caja">
+      <Label layoutX="101.0" layoutY="88.0" text="Tipo de Caja">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="btnAceptar" layoutX="91.0" layoutY="229.0" mnemonicParsing="false" onAction="#regresar" prefHeight="31.0" prefWidth="119.0" text="Aceptar" />
-      <RadioButton fx:id="rdAutomatica" layoutX="96.0" layoutY="137.0" mnemonicParsing="false" onAction="#determinarCaja" text="Automatica" />
-      <RadioButton fx:id="rdManual" layoutX="96.0" layoutY="175.0" mnemonicParsing="false" onAction="#determinarCaja" text="Manual" />
+      <RadioButton fx:id="rdAutomatica" layoutX="99.0" layoutY="126.0" mnemonicParsing="false" text="Automatica" />
+      <RadioButton fx:id="rdManual" layoutX="99.0" layoutY="159.0" mnemonicParsing="false" text="Manual" />
+      <Separator layoutX="51.0" layoutY="65.0" prefWidth="200.0" />
+      <Separator layoutX="50.0" layoutY="217.0" prefWidth="200.0" />
    </children>
 </Pane>

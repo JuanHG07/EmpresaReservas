@@ -46,8 +46,8 @@ public class Reserva {
         this.vehiculo = vehiculo;
     }
 
-    public void calcularCostoReserva() {
-        this.costo = vehiculo.calcularCostoVehiculo();
+    public void calcularCosto() {
+        this.costo = vehiculo.calcularCostoVehiculo(this);
     }
 
     @Override
