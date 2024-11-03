@@ -38,7 +38,7 @@ public class CamionetaViewController {
             Stage stage = (Stage) btnAceptar.getScene().getWindow();
             stage.close();
 
-        } else {
+        } else if (txtCapacidadCarga.getText().isEmpty()) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);

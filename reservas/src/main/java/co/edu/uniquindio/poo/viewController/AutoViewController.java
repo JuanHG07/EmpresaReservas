@@ -38,7 +38,7 @@ public class AutoViewController {
             Stage stage = (Stage) btnAceptar.getScene().getWindow();
             stage.close();
 
-        } else {
+        } else if (txtNumeroPuertas.getText().isEmpty()) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);

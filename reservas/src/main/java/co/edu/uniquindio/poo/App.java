@@ -107,6 +107,7 @@ public class App extends Application {
     }
 
     public void openCamionetaView() {
+        
         try {
 
             if (camionetaStage == null) {

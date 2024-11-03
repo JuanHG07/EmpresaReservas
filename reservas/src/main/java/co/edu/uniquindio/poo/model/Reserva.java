@@ -3,9 +3,9 @@ package co.edu.uniquindio.poo.model;
 public class Reserva {
     private String codigo;
     private int dias;
-    private double costo;
     private Cliente cliente;
     private Vehiculo vehiculo;
+    private double costo;
 
     public Reserva(String codigo, int dias, Cliente cliente, Vehiculo vehiculo) {
         this.codigo = codigo;
@@ -34,6 +34,10 @@ public class Reserva {
         return cliente;
     }
 
+    public String getCedula() {
+        return cliente != null ? cliente.getCedula() : null;
+    }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -42,8 +46,16 @@ public class Reserva {
         return vehiculo;
     }
 
+    public String getMatricula() {
+        return vehiculo != null ? vehiculo.getMatricula() : null;
+    }
+
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+
+    public double getCosto() {
+        return costo;
     }
 
     public void calcularCosto() {

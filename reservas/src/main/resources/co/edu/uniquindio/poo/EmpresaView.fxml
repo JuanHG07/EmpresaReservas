@@ -150,12 +150,12 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtCodigo" layoutX="271.0" layoutY="126.0" prefHeight="31.0" prefWidth="266.0" />
-                  <TextField fx:id="txtCedulaR" layoutX="272.0" layoutY="167.0" prefHeight="31.0" prefWidth="265.0" />
-                  <TextField fx:id="txtMatriculaR" layoutX="271.0" layoutY="249.0" prefHeight="31.0" prefWidth="265.0" />
-                  <TextField fx:id="txtDias" layoutX="271.0" layoutY="331.0" prefHeight="31.0" prefWidth="266.0" />
-                  <Button fx:id="btnAgregarR" layoutX="119.0" layoutY="671.0" mnemonicParsing="false" onAction="#agregarReserva" prefHeight="31.0" prefWidth="166.0" text="Agregar" />
-                  <Button fx:id="btnModificarR" layoutX="321.0" layoutY="671.0" mnemonicParsing="false" onAction="#modificarReserva" prefHeight="31.0" prefWidth="166.0" text="Modificar" />
-                  <Button fx:id="btnEliminarR" layoutX="525.0" layoutY="671.0" mnemonicParsing="false" onAction="#eliminarReserva" prefHeight="31.0" prefWidth="166.0" text="Eliminar" />
+                  <TextField fx:id="txtCedulaR" layoutX="272.0" layoutY="249.0" prefHeight="31.0" prefWidth="265.0" />
+                  <TextField fx:id="txtMatriculaR" layoutX="273.0" layoutY="331.0" prefHeight="31.0" prefWidth="265.0" />
+                  <TextField fx:id="txtDias" layoutX="271.0" layoutY="167.0" prefHeight="31.0" prefWidth="266.0" />
+                  <Button fx:id="btnAgregarR" layoutX="56.0" layoutY="671.0" mnemonicParsing="false" onAction="#agregarReserva" prefHeight="31.0" prefWidth="166.0" text="Agregar" />
+                  <Button fx:id="btnModificarR" layoutX="233.0" layoutY="671.0" mnemonicParsing="false" onAction="#modificarReserva" prefHeight="31.0" prefWidth="166.0" text="Modificar" />
+                  <Button fx:id="btnEliminarR" layoutX="412.0" layoutY="671.0" mnemonicParsing="false" onAction="#eliminarReserva" prefHeight="31.0" prefWidth="166.0" text="Eliminar" />
                   <Label layoutX="67.0" layoutY="86.0" text="1. Ingrese los datos de la Reserva" />
                   <Label layoutX="69.0" layoutY="216.0" text="2. Ingrese la cedula del Cliente de la correspondiente Reserva" />
                   <Label layoutX="69.0" layoutY="296.0" text="3. Ingrese la matricula del Vehiculo a reservar" />
@@ -163,6 +163,7 @@
                   <Separator layoutX="56.0" layoutY="75.0" prefHeight="11.0" prefWidth="696.0" />
                   <Separator layoutX="56.0" layoutY="405.0" prefHeight="11.0" prefWidth="696.0" />
                   <Separator layoutX="56.0" layoutY="656.0" prefHeight="11.0" prefWidth="696.0" />
+                  <Button fx:id="btnActualizar" layoutX="586.0" layoutY="671.0" mnemonicParsing="false" onAction="#actualizarTabla" prefHeight="31.0" prefWidth="166.0" text="Actualizar" />
                </children></AnchorPane>
       </content>
     </Tab>
